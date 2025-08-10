@@ -73,7 +73,7 @@ body, .content p {
 @media (max-width: 600px) {
     .content p {
         width: 100%;
-        font-size: 1.2rem; 
+        font-size: 1.2rem;
         line-height: 1.5;
         text-align: center;
         margin-bottom: 1.2rem;
