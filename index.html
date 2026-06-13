@@ -3,37 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Igor Balos Portfolio</title>
+    <title>Igor Balos — Senior Software Engineer</title>
+    <meta name="description" content="Hello. I'm Igor — a senior software engineer who has built for the web, remotely, for over 15 years.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/png" href="favicon.png">
+    <script>
+        // Set theme before paint to avoid a flash of the wrong colors.
+        (function () {
+            try {
+                var t = localStorage.getItem('theme');
+                if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) {}
+        })();
+    </script>
+    <noscript>
+        <!-- Without JS the reveal animations never run, so show that content. -->
+        <style>.reveal { opacity: 1 !important; }</style>
+    </noscript>
 </head>
 <body>
+<div class="topveil" aria-hidden="true"></div>
+<div class="progress"></div>
+
+<header class="topbar">
+    <a href="https://github.com/ibalosh" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/ibalosh" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:hello@ibalosh.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+</header>
+
 <main>
-    <section class="content">
-        <h1>
-            <span>HI</span><span class="lighter">THERE</span><span>I'M</span>
-            <span class="last">IGORBALOS</span>
-        </h1>
-        <p>
-            I’m an engineer passionate about computers, a perfectionist who enjoys
-            squash, kitesurfing, snowboarding, and great sound. When I’m not building for the web,
-            you’ll probably find me chasing wind, carving fresh snow, or fine-tuning my audio setup
-            in search of the perfect listening experience.
+    <!-- HERO -->
+    <section class="hero">
+        <h1 class="hello"><span class="hello-text">Hello</span><span class="dot">.</span></h1>
+        <p class="lede reveal">
+            I'm <span class="name">Igor</span>, Senior Software Engineer.
         </p>
-        <p class="contact-line">
-            Follow me on
-            <a href="https://github.com/ibalosh" target="_blank">
+        <p class="scroll-hint reveal">Scroll to read the short version <span class="chevron" aria-hidden="true"></span></p>
+    </section>
+
+    <!-- STORY -->
+    <section class="story">
+        <p class="line">
+            For <mark class="y">over 15 years</mark> I've built software for the web —
+            <mark class="b">remotely</mark>, long before it was the default.
+        </p>
+
+        <p class="line">
+            I care about the unglamorous parts: <em>correctness</em>, reliability, and
+            systems that keep working when no one is watching.
+        </p>
+
+        <p class="line">
+            My happy place is <mark class="y">Ruby on Rails</mark> — and the
+            <mark class="b">37signals</mark> way of building: small teams, sharp opinions,
+            and software that stays simple on purpose.
+        </p>
+
+        <p class="line">
+            Some of that work is out in the world. I built the official
+            <a href="https://github.com/ActiveCampaign/postmark.js" target="_blank" rel="noopener">Postmark</a>
+            client libraries used by <mark class="y">thousands of developers</mark>, and shipped tools at
+            <span class="nowrap">Wildbit</span>, <span class="nowrap">ActiveCampaign</span>, and
+            <span class="nowrap">Ghost</span>.
+        </p>
+
+        <p class="line">
+            Away from the keyboard I'm chasing wind, carving fresh snow,
+            on a squash court, or hunting the <mark class="b">perfect sound</mark>.
+        </p>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact">
+        <h2 class="reveal">Let's build something<span class="dot">.</span></h2>
+        <p class="links reveal">
+            <a href="https://github.com/ibalosh" target="_blank" rel="noopener">
                 <i class="fab fa-github"></i> GitHub
-            </a>, connect on
-            <a href="https://www.linkedin.com/in/ibalosh" target="_blank">
+            </a>
+            <a href="https://www.linkedin.com/in/ibalosh" target="_blank" rel="noopener">
                 <i class="fab fa-linkedin"></i> LinkedIn
-            </a>, work with me or say hi via
+            </a>
             <a href="mailto:hello@ibalosh.com">
-                <i class="fas fa-envelope"></i> Email
-            </a> .
+                <i class="fas fa-envelope"></i> hello@ibalosh.com
+            </a>
         </p>
     </section>
 </main>
+
+<script>
+    // Dark / light toggle.
+    (function () {
+        var btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        var icon = btn.querySelector('i');
+        function sync() {
+            var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+            icon.className = dark ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        sync();
+        btn.addEventListener('click', function () {
+            var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (e) {}
+            sync();
+        });
+    })();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
